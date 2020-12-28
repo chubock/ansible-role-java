@@ -3,6 +3,7 @@ galaxy_info:
   description: Install Java
   author: Hassan Moosavi
   license: BSD
-  platforms: debian
+  platforms:
+    - debian
   galaxy_tags:
     - java
