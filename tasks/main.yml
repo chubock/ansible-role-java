@@ -1,0 +1,46 @@
+---
+- name: check tar installation
+  apt:
+    name: tar
+
+- name: checking directory existense for {{ target_path }}
+  file:
+    path: '{{ target_path }}'
+    state: directory
+
+- name: Check that {{ target_path }}/bin/java exists
+  stat:
+    path: "{{ target_path }}/bin/java"
+  register: java_exists_result
+
+- name: Downloading {{ jdk_url }}
+  get_url:
+    url: "{{ jdk_url }}"
+    dest: /tmp/jdk.tar.gz
+  when: not java_exists_result.stat.exists
+
+- name: unarchiving jdk-11.0.7_linux-x64_bin.tar.gz package
+  unarchive:
+    src: /tmp/jdk.tar.gz
+    dest: '{{ target_path }}'
+    remote_src: true
+    extra_opts:
+      - --strip-components=1
+    creates: "{{ target_path }}/bin/java"
+
+- name: checking directory existense for {{ java_home }}
+  file:
+    path: '{{ java_home | dirname }}'
+    state: directory
+    recurse: true
+
+- name: setting up {{ java_home }}
+  file:
+    src: '{{ target_path }}'
+    path: '{{ java_home }}'
+    state: link
+
+- name: setting up environments with /etc/profile.d/java-env.sh file
+  template:
+    src: java.sh.j2
+    dest: /etc/profile.d/java-env.sh
