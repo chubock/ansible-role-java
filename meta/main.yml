@@ -4,6 +4,8 @@ galaxy_info:
   author: Hassan Moosavi
   license: BSD
   platforms:
-    - debian
+    - name: debian
+      versions:
+        - 10
   galaxy_tags:
     - java
