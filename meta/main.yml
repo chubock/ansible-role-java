@@ -2,6 +2,7 @@ galaxy_info:
   role_name: java
   description: Install Java
   author: Hassan Moosavi
-  lisence: BSD
+  license: BSD
+  platforms: debian
   galaxy_tags:
     - java
