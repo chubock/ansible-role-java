@@ -1,3 +1,7 @@
 galaxy_info:
   role_name: java
   description: Install Java
+  author: Hassan Moosavi
+  lisence: BSD
+  galaxy_tags:
+    - java
