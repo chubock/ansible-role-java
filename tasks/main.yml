@@ -13,17 +13,11 @@
     path: "{{ target_path }}/bin/java"
   register: java_exists_result
 
-- name: Downloading {{ jdk_url }}
-  get_url:
-    url: "{{ jdk_url }}"
-    dest: /tmp/jdk.tar.gz
-  when: not java_exists_result.stat.exists
-
-- name: unarchiving jdk-11.0.7_linux-x64_bin.tar.gz package
+- name: unarchiving jdk package
   unarchive:
-    src: /tmp/jdk.tar.gz
+    src: "{{ jdk_url }}"
     dest: '{{ target_path }}'
-    remote_src: true
+    copy: false
     extra_opts:
       - --strip-components=1
     creates: "{{ target_path }}/bin/java"
