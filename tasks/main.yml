@@ -5,34 +5,17 @@
 
 - name: checking directory existense for {{ jdk_path }}
   file:
-    path: '{{ jdk_path }}'
+    path: '{{ java_home }}'
     state: directory
-
-- name: Check that {{ jdk_path }}/bin/java exists
-  stat:
-    path: "{{ jdk_path }}/bin/java"
-  register: java_exists_result
 
 - name: unarchiving jdk package
   unarchive:
     src: "{{ jdk_url }}"
-    dest: '{{ jdk_path }}'
+    dest: '{{ java_home }}'
     copy: false
     extra_opts:
       - --strip-components=1
-    creates: "{{ jdk_path }}/bin/java"
-
-- name: checking directory existense for {{ java_home }}
-  file:
-    path: '{{ java_home | dirname }}'
-    state: directory
-    recurse: true
-
-- name: setting up {{ java_home }}
-  file:
-    src: '{{ jdk_path }}'
-    path: '{{ java_home }}'
-    state: link
+    creates: "{{ java_home }}/bin/java"
 
 - name: setting up environments with /etc/profile.d/java-env.sh file
   template:

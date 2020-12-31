@@ -1,4 +1,3 @@
 ---
-jdk_path: '/opt/java/jdk-11'
 java_home: '/opt/java/default'
 jdk_url: https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
