@@ -3,9 +3,10 @@ galaxy_info:
   description: Install Java
   author: Hassan Moosavi
   license: BSD
+  min_ansible_version: 2.1
   platforms:
     - name: debian
       versions:
-        - 10
+        - all
   galaxy_tags:
     - java
